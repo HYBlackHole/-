@@ -1,1 +1,578 @@
 
+import random
+import os
+from time import sleep
+
+l1 = []
+l2 = []
+l3 = []
+l4 = []
+l5 = []
+item = 0
+spe = 0
+ll = 30
+ite1 = 0
+juqingl = ["• 你生于'日落村'的一个普通家庭，并不富裕；", "• 为了更好的生活，你在十一岁那年决定出去闯荡；", "• 民间相传不远的深山里藏有大机遇；", "• 告别家人，你来到深山...", "• 游戏目标是集齐三个功法残篇，开始新的故事；", "• 在地图中，你需要输入字符来移动；", "• 系统会随机生成天材地宝，和相应的妖兽；", "• 跋涉将重置地图，到达任意危险系数的地域；", "• 危险系数会决定妖兽和机遇的等级；","• 一旦灵力低于0，游戏将结束。", "• 你获得了深山里的传承；", "• 正式踏上了修仙之路；", "• 出山之后，你开始闯荡；", "• 由于你在深山中的磨砺和奇遇；", "• 你成为了新一代之中的翘楚；", "• 故事未完待续...", "• 由于各种原因，你被妖兽打败了；", "• 你多希望能重来，却心有余而力不足；", "• 带着家里的希望和不甘，你意外的踏入了轮回；", "• 请重试开始冒险..."]
+wx = 0
+
+def juqing():
+  global ite1
+  global juqingl
+  print(juqingl[ite1])
+  ite1 += 1
+
+
+spex = []
+spey = []
+choice = [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
+x = 0
+y = 0
+gongfa = 0
+star = ""
+jyan = 0
+
+def clear():
+  os.system("clear")
+
+def regen():
+  global spex
+  global spey
+  global choice
+  global x
+  global y
+  global wx
+  global star
+  choice = [-2, -1, 0, 1, 2, 3, 4, 5, 6, 7]
+  spex = []
+  spey = []
+  for y in range(-2,3):
+    if y != 0:
+        r = random.randint(1,10)
+        if r > 2:
+          spey.append(y)
+          x1 = random.choice(choice)
+          spex.append(x1)
+          choice.remove(x1)
+  ok = 0
+  wx = random.randint(1,100)
+  if wx > 90-(gongfa*5):
+    wx = 4
+    star = "****"
+  elif wx > 70-(gongfa*7):
+    wx = 3
+    star = "***"
+  elif wx > 50-(gongfa*10):
+    wx = 2
+    star = "**"
+  else:
+    wx = 1
+    star = "*"
+  while ok == 0:
+    x = random.randint(-2, 7)
+    y = random.randint(-2, 2)
+    if x in spex:
+      pass
+    else:
+      ok = 1
+  for x in range(0,3):
+    clear()
+    print("\n跋涉中.")
+    sleep(0.5)
+    clear()
+    print("\n跋涉中..")
+    sleep(0.5)
+    clear()
+    print("\n跋涉中...")
+    sleep(0.5)
+  sleep(2)
+
+
+
+def line():
+  print("-----------------------------------------")
+
+def init():
+  global l1
+  global l2
+  global l3
+  global l4
+  global l5
+  l1 = []
+  l2 = []
+  l3 = []
+  l4 = []
+  l5 = []
+  for x in range(0, 10):
+    l1.append("|")
+    l1.append(" ")
+    l1.append(" ")
+    l1.append(" ")
+  for x in range(0, 10):
+    l2.append("|")
+    l2.append(" ")
+    l2.append(" ")
+    l2.append(" ")
+  for x in range(0, 10):
+    l3.append("|")
+    l3.append(" ")
+    l3.append(" ")
+    l3.append(" ")
+  for x in range(0, 10):
+    l4.append("|")
+    l4.append(" ")
+    l4.append(" ")
+    l4.append(" ")
+  for x in range(0, 10):
+    l5.append("|")
+    l5.append(" ")
+    l5.append(" ")
+    l5.append(" ")
+  l1.append("|")
+  l2.append("|")
+  l3.append("|")
+  l4.append("|")
+  l5.append("|")
+
+game = 1
+gongfa1 = 0
+gongfa2 = 0
+gongfa3 = 0
+guo1 = 0
+guo2 = 0
+guo3 = 0
+guo4 = 0
+
+def map():
+  global x
+  global y
+  global spex
+  global spey
+  global item
+  global spe
+  global game
+  global ll
+  global wx
+  global gongfa
+  global gongfa1
+  global gongfa2
+  global gongfa3
+  global star
+  global jyan
+  global guo1
+  global guo2
+  global guo3
+  global guo4
+  line()
+  init()
+
+  p = 4*(x+2)+2
+  if y < 0:
+    if y == -1:
+      l4[p] = "∆"
+    else:
+      l5[p] = "∆"
+  elif y < 2:
+    if y == 0:
+      l3[p] = "∆"
+    else:
+      l2[p] = "∆"
+  else:
+    l1[p] = "∆"
+
+  if x in spex:
+    if y == spey[spex.index(x)]:
+      jyan += 1
+      spex.pop(spey.index(y))
+      spey.pop(spey.index(y))
+      item = 1
+      r3 = random.randint(1,100)
+      if wx == 1:
+        if r3 < 33 and gongfa1 != 0:
+          if jyan < 2:
+            spe = "ll"
+          else:
+            spe = "gfa"
+        else:
+          spe = "ll"
+      elif wx == 2:
+        if r3 < 22 and gongfa2 != 0:
+          spe = "gfa"
+        else:
+          spe = "ll"
+      elif wx == 3:
+        if r3 < 22 and gongfa2 != 0:
+          spe = "gfa"
+        else:
+          spe = "ll"
+      else:
+        if ll > 800:
+          spe = "gfa"
+        elif r3 < 11 and gongfa3 != 0:
+          spe = "gfa"
+        else:
+          spe = "ll"
+
+  if len(spex) != 0:
+    for o in spex:
+      p = 4*(o+2)+2
+      if spey[spex.index(o)] < 0:
+        if spey[spex.index(o)] == -1:
+          l4[p] = "*"
+        else:
+          l5[p] = "*"
+      elif spey[spex.index(o)] < 2:
+        if spey[spex.index(o)] == 0:
+          l3[p] = "*"
+        else:
+          l2[p] = "*"
+      else:
+        l1[p] = "*"
+
+  print("".join(l1))
+  line()
+  print("".join(l2))
+  line()
+  print("".join(l3))
+  line()
+  print("".join(l4))
+  line()
+  print("".join(l5))
+  line()
+  if item == 1:
+    item = 0
+    sleep(1)
+    clear()
+
+    if spe == "ll":
+
+      if wx == 1:
+        guo1 = ["灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "千年古参", "灵石", "千年古参", "千年古参", "", ""]
+        if jyan < 2:
+          life = random.randint(ll-29, ll)
+        else:
+          life = random.randint(10, 70)
+        guo = random.choice(guo1)
+      elif wx == 2:
+        guo2 = ["灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "千年古参", "千年古参", "龙筋草", "星辰果", "", "", ""]
+        life = random.randint(70, 200)
+        guo = random.choice(guo2)
+      elif wx == 3:
+        guo3 = ["灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "星辰果", "千年古参", "千年古参", "千年古参", "龙筋草", "星辰果", "灵石", "灵石", "", "", ""]
+        life = random.randint(200, 400)
+        guo = random.choice(guo3)
+      else:
+        guo4 = ["灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "灵石", "菩提果", "星辰果", "千年古参", "千年古参", "千年古参", "龙筋草", "龙筋草", "星辰果", "灵石", "", ""]
+        life = random.randint(400, 500)
+        guo = random.choice(guo4)
+
+      if guo == "菩提果":
+        huode = 80
+      elif guo == "龙筋草":
+        huode = 50
+      elif guo == "星辰果":
+        huode = 40
+      elif guo == "千年古参":
+        huode = 20
+      elif guo == "灵石":
+        huode = 10
+
+      if guo != "":
+        print("\n发现天材地宝!")
+        sleep(3)
+      clear()
+      if life < 201:
+        print("\n遇见 \033[1;32m野兽\033[0;37m: {}生命值\n灵力值: {}\n\n战斗中...".format(life, ll))
+      elif life < 401:
+        print("\n遇见 \033[1;31m凶兽\033[0;37m: {}生命值\n灵力值: {}\n\n战斗中...".format(life, ll))
+      else:
+        print("\n遇见 \033[1;33m神兽\033[0;37m: {}生命值\n灵力值: {}\n\n战斗中...".format(life, ll))
+      sleep(5)
+      if ll > 350:
+        telife = 10
+      else:
+        telife = 0
+      if ll > life-1:
+        clear()
+        if ll < life+20+telife:
+          print("\n你稍占上风，它慌落而逃!")
+        else:
+          if life > 200:
+            r2 = random.randint(1,10)
+            if r2 > 5:
+              print("\n你成功击杀了它，还发现了它的内丹！")
+              print("[灵力值 +{}]".format(round(life/6)))
+              ll += round(life/6)
+            else:
+              print("\n你成功击杀了它!")
+          else:
+            print("\n你成功击杀了它!")
+        if guo != "":
+          print("\n在附近发现: {}".format(guo))
+          print("[灵力值 +{}]".format(huode))
+          ll += round(huode)
+          if wx == 1:
+            guo1.remove(guo)
+          elif wx == 2:
+            guo2.remove(guo)
+          elif wx == 3:
+            guo3.remove(guo)
+          else:
+            guo4.remove(guo)
+      else:
+        clear()
+        if ll+10+telife > life:
+          print("\n它稍占上风，你慌落而逃!")
+          print("\n[灵力值 -{}]".format((life-ll)+5))
+          ll -= (life-ll)+5
+        elif ll+20+telife > life:
+          print("\n它打败了你，你气血受损！")
+          print("\n[灵力值 -{}]".format(round(ll/5)+10))
+          ll -= round(ll/5)+10
+        elif ll+50+telife > life:
+          print("\n它完全碾压了你，你被重伤！")
+          print("\n[灵力值 -{}]".format(round(ll/2)+40))
+          ll -= round(ll/2)+40
+        else:
+          print("\n它实力远超于你，你惨遭落败！")
+          print("\n[灵力值 -{}]".format(ll))
+          ll = 0
+
+
+
+    elif spe == "gfa":
+      if wx == 1:
+        num = 0
+      elif wx == 2:
+        num = 1
+      elif wx == 3:
+        num = 1
+      else:
+        num = 2
+
+      if ll > 350:
+        telife = 10
+      else:
+        telife = 0
+
+      if num == 0:
+        life = 20
+        mtype = "\033[1;32m玄鹿\033[0;37m"
+      elif num == 1:
+        life = 200
+        mtype = "\033[1;31m夜疾凶狼\033[0;37m"
+      else:
+        life = 600
+        mtype = "\033[1;33m通天巨猿\033[0;37m"
+      print("\n发现功法残篇！")
+      sleep(4)
+      clear()
+      print("\n遇见守护兽 {}: {}生命值\n灵力值: {}\n战斗中...".format(mtype, life, ll))
+      sleep(7)
+
+      if ll > life-1:
+        clear()
+        gongfa += 1
+        if ll < life+20+telife:
+          print("\n你稍占上风，它慌落而逃!")
+        else:
+          if life > 200:
+            r2 = random.randint(1,10)
+            if r2 > 5:
+              print("\n你成功击杀了它，还发现了它的内丹！")
+              print("[灵力值 +{}]".format(round(life/6)))
+              ll += round(life/6)
+            else:
+              print("\n你成功击杀了它!")
+          else:
+            print("\n你成功击杀了它!")
+        print("\n[功法: {}/3]".format(gongfa))
+        print("[灵力值 +{}]".format((gongfa)*30))
+        ll += 30
+
+        if wx == 1:
+          gongfa1 = 1
+        elif wx == 2:
+          gongfa2 = 1
+        elif wx == 3:
+          gongfa2 = 1
+        else:
+          gongfa3 = 1
+
+      else:
+        clear()
+        if ll+10+telife > life:
+          print("\n它稍占上风，你慌落而逃!")
+          print("\n[灵力值 -{}]".format((life-ll)+10))
+          ll -= (life-ll)+10
+        elif ll+20+telife > life:
+          print("\n它打败了你，你气血受损！")
+          print("你没有获得功法的残篇")
+          print("\n[灵力值 -{}]".format(round(ll/5)+20))
+          ll -= round(ll/5)+20
+        elif ll+50+telife > life:
+          print("\n它完全碾压了你，你被重伤！")
+          print("你没有获得功法的残篇")
+          print("\n[灵力值 -{}]".format(round(ll/2)+40))
+          ll -= round(ll/2)+40
+        else:
+          print("\n它实力远超于你，你惨遭落败！")
+          print("你没有获得功法的残篇")
+          print("\n[灵力值 -{}]".format(ll))
+          ll = 0
+
+    if gongfa == 3:
+      clear()
+      print("\n恭喜你打败了神兽!")
+      print("\n[功法: 3/3]")
+      print("[灵力值 : {}]".format(ll))
+      print("你获得了一个完整的功法!")
+      print("(别走，还有后记)")
+      sleep(5)
+      game = 0
+    elif ll < 1:
+      ll = 0
+      print("[灵力值 : 0]")
+      print("\n哦不!你被击败了!")
+      print("(别走，还有后记)")
+      game = 0
+      sleep(3)
+    else:
+      sleep(5)
+      clear()
+      print("\n坐标 :(\033[0;34m{}, {}\033[0;37m)".format(x,y))
+      print("危险系数：{}".format(star))
+      print("\n灵力值 : \033[0;34m{}\033[0;37m".format(ll))
+      print("[功法: {}/3]".format(gongfa))
+      map()
+
+clear()
+sleep(2)
+print("\n\033[1;37m      健康游戏忠告：\033[0;37m")
+print("抵制不良游戏，拒绝盗版游戏。")
+print("注意自我保护，谨防受骗上当。")
+print("适度游戏益脑，沉迷游戏伤身。")
+print("合理安排时间，享受健康生活。")
+sleep(4)
+clear()
+sleep(0.5)
+print("\n「深山奇遇记」")
+sleep(3)
+clear()
+sleep(0.5)
+print("\nSweet_Cloud_N")
+sleep(3)
+clear()
+sleep(2)
+print("\n剧情：\n")
+sleep(2)
+for x in range(0,4):
+  juqing()
+  sleep(4)
+q = input("\n[回车继续]")
+sleep(1.5)
+clear()
+sleep(1.5)
+
+print("\n指南：\n")
+sleep(2)
+for x in range(0,6):
+  juqing()
+  sleep(4)
+q = input("\n[回车继续]")
+sleep(1.5)
+clear()
+sleep(0.5)
+print("\n祝您游玩愉快 ！")
+sleep(3)
+clear()
+sleep(1.5)
+
+
+regen()
+sleep(1)
+
+q = ""
+
+while True:
+  clear()
+  print("\n坐标 :(\033[0;34m{}, {}\033[0;37m)".format(x,y))
+  print("危险系数：{}".format(star))
+  print("\n灵力值 : \033[0;34m{}\033[0;37m".format(ll))
+  print("[功法: {}/3]".format(gongfa))
+  map()
+  if game == 0:
+    if ll != 0:
+      clear()
+      sleep(1.5)
+      print("\n后记：\n")
+      sleep(2)
+      ite1 = 10
+      for x in range(0,6):
+        juqing()
+        sleep(4)
+    else:
+      clear()
+      sleep(1.5)
+      ite1 = 16
+      print("\n后记：\n")
+      sleep(2)
+      for x in range(0,4):
+        juqing()
+        sleep(4)
+    print("\n完")
+    break
+  print("\n[左][z]\n[右][y]\n[上][s]\n[下][x]\n[跋涉]][b]\n[其他][q]")
+  q = input("\n>>> ")
+  if q == "z":
+    if x-1 > -3:
+      x -= 1
+    else:
+      clear()
+      print("\n你不能继续前进!")
+      sleep(1)
+  if q == "y":
+    if x+1 < 8:
+      x += 1
+    else:
+      clear()
+      print("\n你不能继续前进!")
+      sleep(1)
+  if q == "x":
+    if y-1 > -3:
+      y -= 1
+    else:
+      clear()
+      print("\n你不能继续前进!")
+      sleep(1)
+  if q == "s":
+    if y+1 < 3:
+      y += 1
+    else:
+      clear()
+      print("\n你不能继续前进!")
+      sleep(1)
+  if q == "b":
+    regen()
+  sleep(0.1)
+  if q == "q":
+    clear()
+    print("\n[设定][s]\n[公告][g]\n[指南][z]\n[退出][t]")
+    q = input("\n>>> ")
+    if q == "s":
+      clear()
+      print("\n设定: \n\n待更新...")
+      #待添加
+      print("\n[退出][t]")
+      q = input("\n>>> ")
+    if q == "g":
+      clear()
+      print("\n公告: ")
+      print("\n• 作者会不定期继续更新此作品；\n• 如有任何其他疑问和建议，见：https://scratch.mit.edu/projects/632285757/")
+      print("\n[退出][t]")
+      q = input("\n>>> ")
+    if q == "z":
+      clear()
+      print("\n高级指南:\n\n待更新...")
+      #待添加
+      print("\n[退出][t]")
+      q = input("\n>>> ")
