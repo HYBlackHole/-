@@ -6,6 +6,7 @@
 - 然后到：https://www.online-python.com/
 - 删除已有的代码
 - 贴贴代码 / 载入文件
+- 按 RUN
 
 游玩愉快！
 
