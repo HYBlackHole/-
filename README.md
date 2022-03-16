@@ -1,13 +1,7 @@
-# - 大家好，这里是「深山奇遇记」的脚本存放网址。
+# 这里是「深山奇遇记」的脚本存放网址。
 
-想要游玩，请：
+- 游玩请见：https://replit.com/@HY-Black-Hole/Shen-Shan-Qi-Yu-Ji?v=1
 
-- 粘粘全部代码 / 或者下载
-- 然后到：https://www.online-python.com/
-- 删除已有的代码
-- 贴贴代码 / 载入文件
-- 按 RUN
 
-游玩愉快！
 
-@Sweet_Cloud_N
+@HY_Black_Hole
